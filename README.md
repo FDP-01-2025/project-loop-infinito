@@ -5,6 +5,8 @@
 
 La estacion espacial “ZERO” es un centro de investigacion que orbita la Tierra. El jugador asume el rol de un astronauta, quien ha quedado atrapado en la nave, que ha activado el protocolo de autodestrucción tras el un fallo del sistema principal. Como el único tecnico espacial, el jugador  tiene que recorrer la nave para poder completar una serie de tareas (mini juegos) para evitar que la nave colapse.
 
+![Banner](https://github.com/ymill016/Images/blob/main/zero%20Proyecto%20c%2B%2B.png)
+
 **Por ejemplo:**
 Este proyecto consiste en un juego de aventuras donde el jugador debe explorar un mundo virtual, recoger objetos, resolver acertijos y enfrentar enemigos. El juego utiliza estructuras de control como `if`, `switch`, y bucles `while` y `for` para generar interacciones dinámicas.
 
