@@ -3,7 +3,7 @@
 
 ## Descripción del Proyecto
 
-Breve descripción del juego, su propósito, cómo se juega y cualquier otro detalle importante que describa la idea general del proyecto.
+La estacion espacial “ZERO” es un centro de investigacion que orbita la Tierra. El jugador asume el rol de un astronauta, quien ha quedado atrapado en la nave, que ha activado el protocolo de autodestrucción tras el un fallo del sistema principal. Como el único tecnico espacial, el jugador  tiene que recorrer la nave para poder completar una serie de tareas (mini juegos) para evitar que la nave colapse.
 
 **Por ejemplo:**
 Este proyecto consiste en un juego de aventuras donde el jugador debe explorar un mundo virtual, recoger objetos, resolver acertijos y enfrentar enemigos. El juego utiliza estructuras de control como `if`, `switch`, y bucles `while` y `for` para generar interacciones dinámicas.
