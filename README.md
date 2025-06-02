@@ -55,4 +55,10 @@ La estacion espacial “ZERO” es un centro de investigacion que orbita la Tier
 
 1. Clona este repositorio en tu máquina local:
    ```bash
-   git clone [URL del repositorio]
+   git clone https://github.com/FDP-01-2025/project-loop-infinito.git
+2. Busca el archivo en la carpeta previamente clonada bajo el nombre [project-loop-infinito].
+3. Abrelo en GitHub.
+4. Crea una nueva terminal y ejecutalo:
+  ```bash
+  g++ -o zero zero.cpp
+  ./zero
