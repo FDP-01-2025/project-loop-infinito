@@ -19,5 +19,9 @@ bool researchLab(){
     y = numeroAleatorio (1,10);
     int respuesta = 3 * pow (x,2) +4 * y;//operacion aritmetica 3x^2+4y
 
-
+    cout << "Resuelve el siguiente problema matemático: ";
+    cout << "Sí x = " << x << " y si y = " << y << " entonces 3x^2 + 4y es ?\n";
+    cout << "Respuesta: ";
+    cin >> respuestaPregunta;
+    return respuestaPregunta == respuesta; //devolver valor 1 o 0
 }
