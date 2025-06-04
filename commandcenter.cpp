@@ -18,6 +18,7 @@ int numeroAleatorio(int min, int max)
 bool flujoCommandCenter(string pregunta, char respuestaCorrecta)
 {
     char respuestaIngresada;
+    cout << "Resuelve el sigiente acertijo lógico:\n";
     cout << pregunta << "\n";
     cin >> respuestaIngresada;
     return respuestaIngresada == respuestaCorrecta;
@@ -46,5 +47,6 @@ bool commandCenter()
 
 int main()
 {
+    srand(time(0));
     return 0;
 }
