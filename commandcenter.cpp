@@ -22,7 +22,7 @@ bool flujoCommandCenter(string pregunta, char respuestaCorrecta)
     cin >> respuestaIngresada;
     return respuestaIngresada == respuestaCorrecta;
 }
-//funcion principal de command center
+//funcion principal de command center: 3 acertijos distintos
 bool commandCenter()
 {
     int aleatorio = numeroAleatorio(1, 3);
@@ -37,6 +37,7 @@ bool commandCenter()
         break;
     case 3:
         return flujoCommandCenter("¿Qué sube, pero nunca baja?\na. Tu edad  b. El sol  c. La marea\n", 'a');
+        break;
 
     default:
         return;
