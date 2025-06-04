@@ -14,6 +14,10 @@ int numeroAleatorio(int min, int max)
 bool researchLab(){
     int x,y;
 
+    int respuestaPregunta = 0;
+    x = numeroAleatorio(1,10);
+    y = numeroAleatorio (1,10);
+    int respuesta = 3 * pow (x,2) +4 * y;//operacion aritmetica 3x^2+4y
 
 
 }
