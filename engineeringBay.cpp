@@ -10,21 +10,34 @@ int numeroAleatorio(int min, int max)
     return min + rand() % (max - min + 1);
 }
 
-bool crewQuarters(){
-    int contra = numeroAleatorio(1000,9999);
+bool crewQuarters(int& codigoGenerado){ //int& para que sea un valor fijo
+    codigoGenerado = numeroAleatorio(1000,9999);
     int regresar;
-    cout << "Memoriza esta constraseña/codigo: "<< contra << "\nEs una Mouseketool que nos ayudará mas tarde\n";
+    cout << "Memoriza esta constraseña/codigo: "<< codigoGenerado << "\nEs una Mouseketool que nos ayudará mas tarde\n";
     cout << "Ingresa 1 para completar la tarea: ";
     cin >> regresar;
-    return true;
+    return regresar == 1;
 }
 
-bool engineeringBay (){
+bool engineeringBay (int codigoCorrecto){
     int contraIngresada = 0;
-    cout << "Ingresa la contraseña: " << contraIngresada << "\n";
-    
+    cout << "Ingresa la contraseña: ";
+    cin >> contraIngresada;
+    return codigoCorrecto == contraIngresada;
 }
 
 int main (){
+    srand(time(0));
+    int code;
+ 
+        if (crewQuarters(code)){
+        cout << "Tarea completada\n";
+    }
+
+    if (engineeringBay(code)){
+        cout << "Tarea completada";
+    }else {
+        cout << "fallastes";
+    }
     return 0;
 }
