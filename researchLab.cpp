@@ -25,3 +25,12 @@ bool researchLab(){
     cin >> respuestaPregunta;
     return respuestaPregunta == respuesta; //devolver valor 1 o 0
 }
+
+int main (){
+    if (researchLab() == 1){
+        cout << "Tarea completaada\n";
+    }else{
+        cout << "fallastes\n";
+    }
+    return 0;
+}
