@@ -4,37 +4,39 @@
 #include <ctime>
 using namespace std;
 
+int codigoGlobal;
+
 // función de numeros aleatorios
 int numeroAleatorio(int min, int max)
 { // parametros para establecer un rango de numero aleatorio
     return min + rand() % (max - min + 1);
 }
 
-bool crewQuarters(int& codigoGenerado){ //int& para que sea un valor fijo
-    codigoGenerado = numeroAleatorio(1000,9999);
+int crewQuarters(){ //int& para que sea un valor fijo
+    codigoGlobal = numeroAleatorio(1000,9999);
     int regresar;
-    cout << "Memoriza esta constraseña/codigo: "<< codigoGenerado << "\nEs una Mouseketool que nos ayudará mas tarde\n";
+    cout << "Memoriza esta constraseña/codigo: "<< codigoGlobal << "\nEs una Mouseketool que nos ayudará mas tarde\n";
     cout << "Ingresa 1 para completar la tarea: ";
     cin >> regresar;
+
     return regresar == 1;
 }
 
-bool engineeringBay (int codigoCorrecto){
+bool engineeringBay (){
     int contraIngresada = 0;
     cout << "Ingresa la contraseña: ";
     cin >> contraIngresada;
-    return codigoCorrecto == contraIngresada;
+    return codigoGlobal == contraIngresada;
 }
 
 int main (){
     srand(time(0));
-    int code;
  
-        if (crewQuarters(code)){
+        if (crewQuarters()){
         cout << "Tarea completada\n";
     }
 
-    if (engineeringBay(code)){
+    if (engineeringBay()){
         cout << "Tarea completada";
     }else {
         cout << "fallastes";
