@@ -4,7 +4,7 @@
 #include <ctime>
 using namespace std;
 
-int codigoGlobal;
+int codigoGlobal; //variable genearal del codigo
 
 // función de numeros aleatorios
 int numeroAleatorio(int min, int max)
@@ -12,16 +12,17 @@ int numeroAleatorio(int min, int max)
     return min + rand() % (max - min + 1);
 }
 
-int crewQuarters(){ //int& para que sea un valor fijo
+//funcion para mostrar el codigo generado
+bool crewQuarters(){ 
     codigoGlobal = numeroAleatorio(1000,9999);
     int regresar;
     cout << "Memoriza esta constraseña/codigo: "<< codigoGlobal << "\nEs una Mouseketool que nos ayudará mas tarde\n";
     cout << "Ingresa 1 para completar la tarea: ";
     cin >> regresar;
-
     return regresar == 1;
 }
 
+//funcion para ingresar el codigo generado mostrado anteriormente
 bool engineeringBay (){
     int contraIngresada = 0;
     cout << "Ingresa la contraseña: ";
@@ -34,12 +35,14 @@ int main (){
  
         if (crewQuarters()){
         cout << "Tarea completada\n";
+    }else{
+        cout << "Fallastes\n";
     }
 
     if (engineeringBay()){
-        cout << "Tarea completada";
+        cout << "Tarea completada\n";
     }else {
-        cout << "fallastes";
+        cout << "Fallastes\n";
     }
     return 0;
 }
