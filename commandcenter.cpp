@@ -1,47 +1,48 @@
-/*Area número 1: Command Center
-tarea de resolver un acertijo simple*/
+/*Area number 1: Command Center
+task to solve a simple riddle*/
 
 #include <iostream>
 #include <ctime>
 using namespace std;
 
-// función de numeros aleatorios
-int numeroAleatorio(int min, int max)
-{ // parametros para establecer un rango de numero aleatorio
+// random number function
+int randomNumber(int min, int max)
+{ // parameters to set a random number range
     return min + rand() % (max - min + 1);
 }
 
-// función de tipo booleana que regresa 1 ó 0 (verdadero o falso)
+// boolean function that returns 1 or 0 (true or false)
 
-// Área 1: Commmand Center
-//funcion para cambiar de acertijos y su respuestas
-bool flujoCommandCenter(string pregunta, char respuestaCorrecta)
+// Area 1: Command Center
+// function to switch between riddles and their answers
+bool commandCenterFlow(string question, char correctAnswer)
 {
-    char respuestaIngresada;
-    cout << "Resuelve el sigiente acertijo lógico:\n";
-    cout << pregunta << "\n";
-    cin >> respuestaIngresada;
-    return respuestaIngresada == respuestaCorrecta;
+    char userAnswer;
+    cout << "Solve the following logic riddle:\n";
+    cout << question << "\n";
+    cin >> userAnswer;
+    return userAnswer == correctAnswer;
 }
-//funcion principal de command center: 3 acertijos distintos
+
+// main function of command center: 3 different riddles
 bool commandCenter()
 {
-    int aleatorio = numeroAleatorio(1, 3);
+    int random = randomNumber(1, 3);
 
-    switch (aleatorio)
+    switch (random)
     {
     case 1:
-        return flujoCommandCenter("Un tren eléctrico va de norte a sur. El viento sopla de este a oeste.\n¿Hacia dónde va el humo?\na. Hacia el Norte  b. Hacia el oeste  c. Hacia ningún lado\n", 'c');
+        return commandCenterFlow("An electric train is going from north to south. The wind blows from east to west.\nWhere does the smoke go?\na. North  b. West  c. Nowhere\n", 'c');
         break;
     case 2:
-        return flujoCommandCenter("¿Qué palabra de cuatro letras contiene seis?\na. ocho  b. seis  c. luna\n", 'b');
+        return commandCenterFlow("What four-letter word contains six?\na. eight  b. six  c. moon\n", 'b');
         break;
     case 3:
-        return flujoCommandCenter("¿Qué sube, pero nunca baja?\na. Tu edad  b. El sol  c. La marea\n", 'a');
+        return commandCenterFlow("What goes up but never comes down?\na. Your age  b. The sun  c. The tide\n", 'a');
         break;
 
     default:
-        return;
+        return false;
     }
 }
 
@@ -50,3 +51,4 @@ int main()
     srand(time(0));
     return 0;
 }
+
