@@ -49,6 +49,13 @@ bool commandCenter()
 int main()
 {
     srand(time(0));
+
+       if (commandCenter()){
+        cout << "Task completed\n";
+    }else{
+        cout << "Fallastes\n";
+    }
+
     return 0;
 }
 
