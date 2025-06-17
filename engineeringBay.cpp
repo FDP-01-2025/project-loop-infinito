@@ -4,37 +4,38 @@
 #include <ctime>
 using namespace std;
 
-int codigoGlobal; //variable genearal del codigo
+int generalCode; //variable genearal del codigo
 
 // función de numeros aleatorios
-int numeroAleatorio(int min, int max)
+int randomNumber(int min, int max)
 { // parametros para establecer un rango de numero aleatorio
     return min + rand() % (max - min + 1);
 }
 
 //funcion para mostrar el codigo generado
 bool crewQuarters(){ 
-    codigoGlobal = numeroAleatorio(1000,9999);
-    int regresar;
-    cout << "Memoriza esta constraseña/codigo: "<< codigoGlobal << "\nEs una Mouseketool que nos ayudará mas tarde\n";
-    cout << "Ingresa 1 para completar la tarea: ";
-    cin >> regresar;
-    return regresar == 1;
+    //inicializando la variable "generalCode" con el numero generado en el rango [1000,9999]
+    generalCode = randomNumber(1000,9999);
+    int goBack;
+    cout << "Remember this password: "<< generalCode << "\nIt's a Mouseketool that will help us later\n";
+    cout << "Enter 1 to complete task: ";
+    cin >> goBack;
+    return goBack == 1;
 }
 
 //funcion para ingresar el codigo generado mostrado anteriormente
 bool engineeringBay (){
-    int contraIngresada = 0;
-    cout << "Ingresa la contraseña: ";
-    cin >> contraIngresada;
-    return codigoGlobal == contraIngresada;
+    int enteredCode = 0;
+    cout << "Enter the generated password: ";
+    cin >> enteredCode;
+    return generalCode == enteredCode;
 }
 
 int main (){
     srand(time(0));
  
         if (crewQuarters()){
-        cout << "Tarea completada\n";
+        cout << "Task completed\n";
     }else{
         cout << "Fallastes\n";
     }
@@ -42,7 +43,7 @@ int main (){
     if (engineeringBay()){
         cout << "Tarea completada\n";
     }else {
-        cout << "Fallastes\n";
+        cout << "You have failed the task\n";
     }
     return 0;
 }
