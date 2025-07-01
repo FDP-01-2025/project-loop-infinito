@@ -1,0 +1,6 @@
+1,Laboratorio Medico,Un ambiente limpio y esteril con una cama de diagnostico en el centro.
+2,Jardin de Hidroponia,Una sala humeda llena de plantas exoticas. Algunas de ellas parecen peligrosas.
+3,Puente de Mando,El centro neurotico de la estacion, lleno de monitores y una silla de capitan.
+4,Camarotes de la Tripulacion,El espacio personal de la tripulacion, ahora extranamente silencioso.
+5,Sala de Ingenieria,Una sala ruidosa con el zumbido del nucleo del motor de la estacion.
+6,Armeria,Una sala segura que contiene equipo de emergencia y armas.
