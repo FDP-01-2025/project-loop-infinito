@@ -42,7 +42,7 @@ La estacion espacial “ZERO” es un centro de investigacion que orbita la Tier
 5. **Armory:** Tarea de juego de meteorito.
 6. **AI Core:** Responder una secuencia lógica de comandos para reiniciar la IA.
 7. **Medical Lab:** Tarea diagnóstico de sistema vital
-8. **Hydroponics Garden:** Tarea de regar las plantas correctas segun su código.
+8. **Hydroponics Garden:** Tarea de regar las plantas correctas segun su pigmentación.
 
 ## Temas a implementar
 1. Uso de condicionales para validar las acciones del jugador y la estructura del juego,y saber en que condiciones puede ganar, perder y penalizar.
