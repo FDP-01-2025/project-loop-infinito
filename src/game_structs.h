@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <vector>
 
@@ -13,6 +14,7 @@ struct Player {
     PlayerStatus status = HEALTHY;
     int turnsRemaining = 8;
     int tasksCompleted = 0;
+    std::string memorizedPassword = "";//almacena contraseña generada
 };
 
 // struct para los datos de las areas.

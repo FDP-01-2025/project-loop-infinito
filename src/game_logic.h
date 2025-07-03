@@ -16,3 +16,6 @@ void navigateToArea(Player& player, std::vector<Area>& gameAreas, int areaId);
 
 void executeMedicalLabLogic(Player& player, std::vector<Area>& gameAreas);
 void executeHydroponicsGardenLogic(Player& player, std::vector<Area>& gameAreas);
+void executeCommandCenter(Player& player, std::vector<Area>& gameAreas);
+void executeCrewQuarters(Player& player, std::vector<Area>& gameAreas);
+void executeEngineeringBay(Player& player, std::vector<Area>& gameAreas);
