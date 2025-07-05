@@ -5,6 +5,85 @@
 #include <sstream>
 #include <limits>
 #include <algorithm> // Necesario para transformar texto a minusculas
+#include <cstdlib>
+#include <ctime>
+#include <conio.h>
+#include <windows.h>
+
+using namespace std;
+
+
+const int filas = 10;
+const int columnas = 10;
+char tablero[filas][columnas];
+int jugadorPos = columnas / 2;
+int meteoritoX, meteoritoY;
+
+void inicializarTablero() {
+    for (int i = 0; i < filas; ++i)
+        for (int j = 0; j < columnas; ++j)
+            tablero[i][j] = ' ';
+    tablero[filas - 1][jugadorPos] = 'A';
+}
+
+void generarMeteorito() {
+    meteoritoX = 0;
+    meteoritoY = rand() % columnas;
+    tablero[meteoritoX][meteoritoY] = '*';
+}
+
+bool moverMeteorito() {
+    if (meteoritoX < filas - 1) {
+        tablero[meteoritoX][meteoritoY] = ' ';
+        meteoritoX++;
+        if (tablero[meteoritoX][meteoritoY] == 'A') {
+            cout << "¡Has sido golpeado por un meteorito! 💥" << endl;
+            system("pause");
+            return false;  // Fin del minijuego
+        }
+        tablero[meteoritoX][meteoritoY] = '*';
+    } else {
+        tablero[meteoritoX][meteoritoY] = ' ';
+        generarMeteorito();
+    }
+    return true; // Sigue jugando
+}
+
+void moverJugador(char direccion) {
+    tablero[filas - 1][jugadorPos] = ' ';
+    if (direccion == 'a' && jugadorPos > 0)
+        jugadorPos--;
+    else if (direccion == 'd' && jugadorPos < columnas - 1)
+        jugadorPos++;
+    tablero[filas - 1][jugadorPos] = 'A';
+}
+
+void mostrarTablero() {
+    system("cls");
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j)
+            cout << "[" << tablero[i][j] << "]";
+        cout << endl;
+    }
+    cout << "\nUsa 'a' para moverte a la izquierda, 'd' para moverte a la derecha.\n";
+}
+
+void juegoMeteoritos() {
+    srand(static_cast<unsigned int>(time(0)));
+    inicializarTablero();
+    generarMeteorito();
+
+    bool jugando = true;
+    while (jugando) {
+        if (_kbhit()) {
+            char tecla = _getch();
+            moverJugador(tecla);
+        }
+        jugando = moverMeteorito();
+        mostrarTablero();
+        Sleep(300);
+    }
+}
 
 bool loadAreasFromFile(const std::string &filePath, std::vector<Area> &gameAreas)
 {
