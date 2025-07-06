@@ -12,44 +12,51 @@
 
 using namespace std;
 
-
 const int filas = 10;
 const int columnas = 10;
 char tablero[filas][columnas];
 int jugadorPos = columnas / 2;
 int meteoritoX, meteoritoY;
 
-void inicializarTablero() {
+void inicializarTablero()
+{
     for (int i = 0; i < filas; ++i)
         for (int j = 0; j < columnas; ++j)
             tablero[i][j] = ' ';
     tablero[filas - 1][jugadorPos] = 'A';
 }
 
-void generarMeteorito() {
+void generarMeteorito()
+{
     meteoritoX = 0;
     meteoritoY = rand() % columnas;
     tablero[meteoritoX][meteoritoY] = '*';
 }
 
-bool moverMeteorito() {
-    if (meteoritoX < filas - 1) {
+bool moverMeteorito()
+{
+    if (meteoritoX < filas - 1)
+    {
         tablero[meteoritoX][meteoritoY] = ' ';
         meteoritoX++;
-        if (tablero[meteoritoX][meteoritoY] == 'A') {
+        if (tablero[meteoritoX][meteoritoY] == 'A')
+        {
             cout << "¡Has sido golpeado por un meteorito! 💥" << endl;
             system("pause");
-            return false;  // Fin del minijuego
+            return false; // Fin del minijuego
         }
         tablero[meteoritoX][meteoritoY] = '*';
-    } else {
+    }
+    else
+    {
         tablero[meteoritoX][meteoritoY] = ' ';
         generarMeteorito();
     }
     return true; // Sigue jugando
 }
 
-void moverJugador(char direccion) {
+void moverJugador(char direccion)
+{
     tablero[filas - 1][jugadorPos] = ' ';
     if (direccion == 'a' && jugadorPos > 0)
         jugadorPos--;
@@ -58,9 +65,11 @@ void moverJugador(char direccion) {
     tablero[filas - 1][jugadorPos] = 'A';
 }
 
-void mostrarTablero() {
+void mostrarTablero()
+{
     system("cls");
-    for (int i = 0; i < filas; ++i) {
+    for (int i = 0; i < filas; ++i)
+    {
         for (int j = 0; j < columnas; ++j)
             cout << "[" << tablero[i][j] << "]";
         cout << endl;
@@ -68,14 +77,17 @@ void mostrarTablero() {
     cout << "\nUsa 'a' para moverte a la izquierda, 'd' para moverte a la derecha.\n";
 }
 
-void juegoMeteoritos() {
+void juegoMeteoritos()
+{
     srand(static_cast<unsigned int>(time(0)));
     inicializarTablero();
     generarMeteorito();
 
     bool jugando = true;
-    while (jugando) {
-        if (_kbhit()) {
+    while (jugando)
+    {
+        if (_kbhit())
+        {
             char tecla = _getch();
             moverJugador(tecla);
         }
@@ -195,6 +207,9 @@ void navigateToArea(Player &player, std::vector<Area> &gameAreas, int areaId)
     case 5:
         executeEngineeringBay(player, gameAreas);
         break;
+    case 7:
+        executeResearchLab(player, gameAreas);
+        break;
     default:
         std::cout << "Esta area parece tranquila por ahora. No hay interacciones especiales." << std::endl;
         break;
@@ -276,7 +291,95 @@ void executeHydroponicsGardenLogic(Player &player, std::vector<Area> &gameAreas)
 void executeCommandCenter(Player &player, std::vector<Area> &gameAreas)
 {
     int areaIndex = 2;
-    // puzzle
+    // no puede entrar si no ha completado 4 salas.
+    if (player.tasksCompleted < 5)
+    {
+        std::cout << "\n[ ¡ACCESO DENEGADO! ] Debes completar al menos 5 tareas para ingresar al Puente de Mando\n";
+    }
+    else if (gameAreas[areaIndex].completed)
+    {
+        std::cout << "\nYa has completado el Centro de Mando. No hay interecciones especiales disponibles.\n";
+    }
+
+    std::cout << "\n[ERROR] El sistema del Centro de Mando está fallando\n";
+    std::cout << "Los nodos de energía están inestables, y solo hay un nodo defectuoso que esta causando el fallo\n";
+    std::cout << "Debes encontrar y desactivar ese nodo desde la matriz energetica.(A-D FILAS, 1-4 COLUMNAS)\n";
+    std::cout << "cargando...\n\n";
+
+    srand(time(0));
+
+    int energyMatrix[4][4] = { // matriz de los nodos 1-4
+        {1, 2, 3, 4},
+        {4, 3, 2, 1},
+        {2, 1, 4, 3},
+        {3, 4, 1, 2}};
+
+    std::string coordinates[4][4] = { //coordenadas, ayuda visual
+        {"A1", "A2", "A3", "A4"},
+        {"B1", "B2", "B3", "B4"},
+        {"C1", "C2", "C3", "C4"},
+        {"D1", "D2", "D3", "D4"}};
+
+    // eligiendo la celda del nodo defectuoso
+    int targetRow = rand() % 4;
+    int targetCol = rand() % 4;
+
+    int targetNode = energyMatrix[targetRow][targetCol];
+    int newValue;
+
+    // cambiando el valor de la celda elegida a uno que ya esté en la fila
+    do
+    {
+        newValue = energyMatrix[targetRow][rand() % 4];
+    } while (newValue == targetNode);
+
+    energyMatrix[targetRow][targetCol] = newValue;
+
+    // mostrar la matriz
+    std::cout << "[MATRIZ NODOS]\n";
+    for (int row = 0; row < 4; row++)
+    {
+        for (int col = 0; col < 4; col++)
+        {
+            std::cout << " [" << energyMatrix[row][col] << "] ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << "[PISTA] Solo hay una celda con valor incorrecto\n";
+
+    // Entrada del jugador y validación
+    std::string input;
+    std::cout << "\nIngrese coordenada del nodo defectuoso (ej. B2) > ";
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //limpiando el bufer
+    std::getline(std::cin, input); 
+
+    if (input.length() != 2)
+    {
+        std::cout << "Entrada invalida.\n";
+    }
+
+    int playerRow = toupper(input[0]) - 'A'; // letra a fila
+    int playerCol = input[1] - '1';          // numero a columna
+
+    if (playerRow < 0 || playerRow >= 4 || playerCol < 0 || playerCol >= 4)
+    {
+        std::cout << "Coordenada fuera del rango.\n";
+    }
+
+    // Verificar si el jugador acertó o no
+    if (playerRow == targetRow && playerCol == targetCol)
+    {
+        std::cout << "\n¡TAREA COMPLETADA! Has detectado y aislado la celda corrupta (" << coordinates[playerRow][playerCol] << ").\n";
+        gameAreas[areaIndex].completed = true;
+        player.tasksCompleted++;
+    }
+    else
+    {
+        std::cout << "\nEsa no es la celda incorrecta. El sistema sigue inestable.\n";
+        std::cout << "La celda corrupta estaba en: " << coordinates[playerRow][playerCol] << ".\n";
+    }
+
 }
 
 // Lógica del los camarotes de la tripulación
@@ -312,7 +415,7 @@ void executeEngineeringBay(Player &player, std::vector<Area> &gameAreas)
         return;
     }
 
-    if (player.memorizedPassword.empty()) //si llega a la sala y no tiene la contraseña
+    if (player.memorizedPassword.empty()) // si llega a la sala y no tiene la contraseña
     {
         std::cout << "\n!Acceso inválido¡\n";
         std::cout << "Intentas activar la consola del Núcleo ZETA, pero el sistema requiere una contraseña que nunca obtuviste.\n";
@@ -327,7 +430,7 @@ void executeEngineeringBay(Player &player, std::vector<Area> &gameAreas)
     std::cout << "\nContraseña > ";
 
     std::string input;
-    std::cin.ignore(); 
+    std::cin.ignore();
     std::getline(std::cin, input);
 
     if (input == player.memorizedPassword)
@@ -344,10 +447,50 @@ void executeEngineeringBay(Player &player, std::vector<Area> &gameAreas)
         std::cout << "\n!CONTRASEÑA INCORRECTA¡";
         std::cout << "Alarmas silenciosas se disparan. Las pantallas parpadean y se apagan una por una.\n";
         std::cout << "El acceso al Núcleo ZETA se ha perdido en el vacío del sistema.\n";
-        std::cout << "No hay vuelta atrás... la estación sigue tambaleándose hacia el colapso.\n";    }
+        std::cout << "No hay vuelta atrás... la estación sigue tambaleándose hacia el colapso.\n";
+    }
 }
 
-//research lab
+// logica de research lab
+void executeResearchLab(Player &player, std::vector<Area> &gameAreas)
+{
+    int index = 6;
+
+    if (gameAreas[index].completed)
+    {
+        std::cout << "\nYa has obtenido la cura de las muestras. No hay nada que hacer aquí.\n";
+    }
+
+    std::cout << "\nEl ambiente es sofocante. Notas que hay vidrios y pantallas rotas.\n";
+    std::cout << "[ADVERTENCIA] Estas infestado por el COVID-19 que se estaba investigando en el laboratorio.\n";
+    std::cout << "Estas agitado y toses violentamiente.\n";
+
+    std::cout << "¡ALERTA! Para sintetizar la cura, debes ordenar correctamente las muestras biológicas contaminadas.\n";
+    std::cout << "Si fallas,, quedarás infectado y deberás volver más tarde...\n";
+
+    std::cout << "\n¿Cuál es el orden correcto de las muestras para sintetizar la cura?\n";
+    std::cout << "1) ALPHA - BETA - GAMA - DELTA\n"; // es el orden correcto
+    std::cout << "2) GAMA - ALPHA - DELTA - BETA\n";
+    std::cout << "3) BETA - GAMA - ALPHA - DELTA\n";
+    std::cout << "4) DELTA - GAMA - BETA - ALPHA\n";
+    std::cout << "[PISTA] La letras inciales de la secuencia correcta es A-B-G-D\n";
+    std::cout << "Ingresa tu opción > ";
+
+    int option;
+    std::cin >> option;
+
+    if (option == 1)
+    {
+        std::cout << "\n\n\n¡Tarea completada! Has sintetizado la cura con éxito.\n";
+        gameAreas[index].completed = true;
+        player.tasksCompleted++;
+    }
+    else
+    {
+        std::cout << "\n¡Fallastes! Te has quedado infestado. Vuelve cuando te sientas listo...\n";
+        player.status = SICK;
+    }
+}
 
 // Bucle principal del juego
 void runGame()
