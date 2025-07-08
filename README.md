@@ -162,4 +162,4 @@ Limpieza de Pantalla Multiplataforma: Se creó una función clearScreen() que ut
    g++ main.cpp src/game_logic.cpp -o ZERO_GAME -std=c++17
 5. Y ejecutalo:
    ```bash
-   ./zero
+   ./ZERO_GAME
