@@ -127,7 +127,10 @@ void navigateToArea(Player &player, std::vector<Area> &gameAreas, int areaId)
     case 6:
         executeArmoryLogic(player, gameAreas);
         break;
-    case 7:
+    case 7: // <--- AÑADE ESTE NUEVO CASO PARA EL AI CORE
+        executeAiCoreLogic(player, gameAreas);
+        break;
+    case 8:
         executeResearchLab(player, gameAreas);
         break;
     default:
@@ -376,7 +379,7 @@ void executeEngineeringBay(Player &player, std::vector<Area> &gameAreas)
 // logica de research lab
 void executeResearchLab(Player &player, std::vector<Area> &gameAreas)
 {
-    int index = 6;
+    int index = 7;
 
     if (gameAreas[index].completed)
     {
@@ -464,6 +467,56 @@ void executeArmoryLogic(Player& player, std::vector<Area>& gameAreas) {
         std::cout << "\nSECUENCIA INCORRECTA. Calibracion fallida." << std::endl;
         std::cout << "Las torretas se mueven erraticamente y vuelven a su posicion inicial." << std::endl;
         std::cout << "Has perdido un tiempo valioso, los meteoritos están cada vez mas cerca y las defensas siguen inactivas." << std::endl;
+    }
+}
+
+
+void executeAiCoreLogic(Player& player, std::vector<Area>& gameAreas) {
+    int areaIndex = 6;
+
+    if (gameAreas[areaIndex].completed) {
+        std::cout << "La IA funciona con parametros estables. No requiere mas ajustes." << std::endl;
+        return;
+    }
+
+    // --- El Puzle de Logica ---
+    std::string correctAnswer = "flush init ethics";
+    std::cout << "La IA principal de la estacion esta en un bucle de errores. Debes reiniciarla manualmente." << std::endl;
+    std::cout << "La consola muestra una serie de reglas de diagnostico para un reinicio seguro:" << std::endl;
+    
+    // Las reglas del puzle
+    std::cout << "\n--- REGLAS DE DIAGNOSTICO ---" << std::endl;
+    std::cout << "1. El cache de memoria debe ser purgado ANTES de inicializar el kernel." << std::endl;
+    std::cout << "2. El modulo de etica debe cargarse DESPUES de que el kernel sea inicializado." << std::endl;
+    std::cout << "3. Un reinicio forzado es inestable y NUNCA debe usarse en esta secuencia." << std::endl;
+    std::cout << "4. El diagnostico de red es irrelevante para la secuencia de reinicio." << std::endl;
+
+    // Los comandos disponibles
+    std::cout << "\n--- COMANDOS DISPONIBLES ---" << std::endl;
+    std::cout << "- init    (Inicializa el kernel)" << std::endl;
+    std::cout << "- ethics  (Carga el modulo de etica)" << std::endl;
+    std::cout << "- flush   (Purga el cache de memoria)" << std::endl;
+    std::cout << "- reboot  (Fuerza un reinicio)" << std::endl;
+    std::cout << "- network (Diagnostico de red)" << std::endl;
+
+    std::cout << "\nIntroduce los 3 comandos correctos en orden, separados por espacios (ej: flush ... ...)" << std::endl;
+    std::cout << "Entrada > ";
+
+    std::string userInput;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, userInput);
+    
+    // --- Evaluacion ---
+    if (userInput == correctAnswer) {
+        std::cout << "\nSECUENCIA ACEPTADA. La IA reinicia sus protocolos de forma estable." << std::endl;
+        std::cout << "Una voz robotica dice: 'Sistemas en linea. Hola, astronauta.'" << std::endl;
+        std::cout << "¡Tarea completada!" << std::endl;
+        player.tasksCompleted++;
+        gameAreas[areaIndex].completed = true;
+    } else {
+        std::cout << "\nSECUENCIA RECHAZADA. El nucleo de la IA emite un pulso de energia." << std::endl;
+        std::cout << "Las luces parpadean y el sistema vuelve a su estado de error anterior." << std::endl;
+        std::cout << "Has fallado en el reinicio. Debes intentarlo de nuevo mas tarde." << std::endl;
     }
 }
 // Bucle principal del juego
