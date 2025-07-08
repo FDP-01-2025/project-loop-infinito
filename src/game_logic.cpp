@@ -292,13 +292,15 @@ void executeCommandCenter(Player &player, std::vector<Area> &gameAreas)
 {
     int areaIndex = 2;
     // no puede entrar si no ha completado 4 salas.
-    if (player.tasksCompleted < 5)
+    if (!player.tasksCompleted == 4)
     {
-        std::cout << "\n[ ¡ACCESO DENEGADO! ] Debes completar al menos 5 tareas para ingresar al Puente de Mando\n";
+        std::cout << "\n[ ¡ACCESO DENEGADO! ] Debes completar al menos 4 tareas para ingresar al Puente de Mando\n";
+        return;
     }
     else if (gameAreas[areaIndex].completed)
     {
         std::cout << "\nYa has completado el Centro de Mando. No hay interecciones especiales disponibles.\n";
+        return;
     }
 
     std::cout << "\n[ERROR] El sistema del Centro de Mando está fallando\n";
