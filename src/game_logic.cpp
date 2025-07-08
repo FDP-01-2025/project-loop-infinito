@@ -60,6 +60,7 @@ void showMainMenu(Player &player, const std::vector<Area> &gameAreas)
     {
         std::cout << area.id << ". " << area.name << (area.completed ? " (Completada)" : "") << std::endl;
     }
+      std::cout << "0. Salir del Juego" << std::endl;
 }
 
 // Pide la opcion al usuario
@@ -484,7 +485,28 @@ void runGame()
     {
         showMainMenu(player, gameAreas);
         int choice = getValidInput();
-        navigateToArea(player, gameAreas, choice);
+        if (choice == 0) {
+            // se pide confirmacion antes de salir
+            std::cout << "\n¿Estas seguro de que quieres salir? (s/n)" << std::endl;
+            std::cout << "Opcion > ";
+            
+            char confirmation;
+            std::cin >> confirmation;
+
+            // se verifica la respuesta del jugador (aceptamos 's' o 'S')
+            if (confirmation == 's' || confirmation == 'S') {
+                std::cout << "\nGracias por jugar. ¡Hasta la proxima!" << std::endl;
+                break; // Se rompe el bucle y el juego termina
+            } else {
+                std::cout << "Regresando al juego..." << std::endl;
+                // Si no es 's' o 'S', no hacemos nada y el bucle continuara,
+                // mostrando el menu de nuevo.
+            }
+
+        } else {
+            // Si la opcion no es 0, la logica del juego continua como siempre
+            navigateToArea(player, gameAreas, choice);
+        }
 
         if (player.tasksCompleted >= 5)
         {
