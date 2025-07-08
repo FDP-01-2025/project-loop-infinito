@@ -20,3 +20,4 @@ void executeCommandCenter(Player& player, std::vector<Area>& gameAreas);
 void executeCrewQuarters(Player& player, std::vector<Area>& gameAreas);
 void executeEngineeringBay(Player& player, std::vector<Area>& gameAreas);
 void executeResearchLab(Player& player, std::vector<Area>& gameAreas);
+void executeArmoryLogic(Player& player, std::vector<Area>& gameAreas); 

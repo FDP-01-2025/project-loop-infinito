@@ -12,90 +12,6 @@
 
 using namespace std;
 
-const int filas = 10;
-const int columnas = 10;
-char tablero[filas][columnas];
-int jugadorPos = columnas / 2;
-int meteoritoX, meteoritoY;
-
-void inicializarTablero()
-{
-    for (int i = 0; i < filas; ++i)
-        for (int j = 0; j < columnas; ++j)
-            tablero[i][j] = ' ';
-    tablero[filas - 1][jugadorPos] = 'A';
-}
-
-void generarMeteorito()
-{
-    meteoritoX = 0;
-    meteoritoY = rand() % columnas;
-    tablero[meteoritoX][meteoritoY] = '*';
-}
-
-bool moverMeteorito()
-{
-    if (meteoritoX < filas - 1)
-    {
-        tablero[meteoritoX][meteoritoY] = ' ';
-        meteoritoX++;
-        if (tablero[meteoritoX][meteoritoY] == 'A')
-        {
-            cout << "¡Has sido golpeado por un meteorito! 💥" << endl;
-            system("pause");
-            return false; // Fin del minijuego
-        }
-        tablero[meteoritoX][meteoritoY] = '*';
-    }
-    else
-    {
-        tablero[meteoritoX][meteoritoY] = ' ';
-        generarMeteorito();
-    }
-    return true; // Sigue jugando
-}
-
-void moverJugador(char direccion)
-{
-    tablero[filas - 1][jugadorPos] = ' ';
-    if (direccion == 'a' && jugadorPos > 0)
-        jugadorPos--;
-    else if (direccion == 'd' && jugadorPos < columnas - 1)
-        jugadorPos++;
-    tablero[filas - 1][jugadorPos] = 'A';
-}
-
-void mostrarTablero()
-{
-    system("cls");
-    for (int i = 0; i < filas; ++i)
-    {
-        for (int j = 0; j < columnas; ++j)
-            cout << "[" << tablero[i][j] << "]";
-        cout << endl;
-    }
-    cout << "\nUsa 'a' para moverte a la izquierda, 'd' para moverte a la derecha.\n";
-}
-
-void juegoMeteoritos()
-{
-    srand(static_cast<unsigned int>(time(0)));
-    inicializarTablero();
-    generarMeteorito();
-
-    bool jugando = true;
-    while (jugando)
-    {
-        if (_kbhit())
-        {
-            char tecla = _getch();
-            moverJugador(tecla);
-        }
-        jugando = moverMeteorito();
-        mostrarTablero();
-        Sleep(300);
-    }
-}
 
 bool loadAreasFromFile(const std::string &filePath, std::vector<Area> &gameAreas)
 {
@@ -206,6 +122,9 @@ void navigateToArea(Player &player, std::vector<Area> &gameAreas, int areaId)
         break;
     case 5:
         executeEngineeringBay(player, gameAreas);
+        break;
+    case 6:
+        executeArmoryLogic(player, gameAreas);
         break;
     case 7:
         executeResearchLab(player, gameAreas);
@@ -492,6 +411,58 @@ void executeResearchLab(Player &player, std::vector<Area> &gameAreas)
     }
 }
 
+void executeArmoryLogic(Player& player, std::vector<Area>& gameAreas) {
+    // El ID de la Armeria es 6, su indice en el vector es 5
+    int areaIndex = 5;
+
+    // se revisa si la tarea ya fue completada
+    if (gameAreas[areaIndex].completed) {
+        std::cout << "El sistema de defensa anti-meteoritos ya esta calibrado y en linea." << std::endl;
+        return;
+    }
+
+    std::string correctSequence = "delta sierra alpha romeo";
+    std::cout << "Accedes a la consola de defensa de la estacion." << std::endl;
+    std::cout << "Se acercan meteoritos y necesitas las torretas para destruirlos. Para calibrar las torretas, debes introducir una secuencia de activacion." << std::endl;
+    std::cout << "Un mensaje parpadea en la pantalla: 'Memoriza y repite la secuencia de alineacion.'" << std::endl;
+    std::cout << "\nSECUENCIA DE CALIBRACION: " << correctSequence << std::endl;
+    std::cout << "\nEscribe 'continuar' y presiona Enter para ocultar la secuencia." << std::endl;
+        
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    // Espera a que el usuario escriba "continuar" para ocultar la secuencia
+    // Esto permite que el usuario tenga tiempo de memorizar la secuencia antes de que desapare
+    std::string confirmation_input = "";
+    while (confirmation_input != "continuar") {
+        std::cout << "Entrada > ";
+        std::getline(std::cin, confirmation_input);
+    }
+    
+
+       system("cls"); // Limpia la pantalla para que la secuencia no se vea mas.
+
+    
+
+    std::cout << "La secuencia ha desaparecido de la pantalla." << std::endl;
+    std::cout << "Introduce la secuencia de calibracion ahora:" << std::endl;
+    std::cout << "Entrada > ";
+
+    std::string userInput;
+    // Este getline esperara correctamente la entrada del usuario.
+    std::getline(std::cin, userInput); 
+
+    // --- Evaluacion ---
+    if (userInput == correctSequence) {
+        std::cout << "\nSECUENCIA CORRECTA. Calibracion exitosa." << std::endl;
+        std::cout << "Los sistemas de defensa de la estacion estan ahora activos y listos para el impacto." << std::endl;
+        std::cout << "¡Tarea completada!" << std::endl;
+        player.tasksCompleted++;
+        gameAreas[areaIndex].completed = true;
+    } else {
+        std::cout << "\nSECUENCIA INCORRECTA. Calibracion fallida." << std::endl;
+        std::cout << "Las torretas se mueven erraticamente y vuelven a su posicion inicial." << std::endl;
+        std::cout << "Has perdido un tiempo valioso, los meteoritos están cada vez mas cerca y las defensas siguen inactivas." << std::endl;
+    }
+}
 // Bucle principal del juego
 void runGame()
 {

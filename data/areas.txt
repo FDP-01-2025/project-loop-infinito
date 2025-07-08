@@ -3,5 +3,5 @@
 3,Puente de Mando,El centro neurotico de la estacion, lleno de monitores y una silla de capitan.
 4,Camarotes de la Tripulacion,El espacio personal de la tripulacion, ahora extranamente silencioso.
 5,Sala de Ingenieria,Una sala ruidosa con el zumbido del nucleo del motor de la estacion.
-6,Armeria,Una sala segura que contiene equipo de emergencia y armas.
+6,Armeria,Una sala segura que contiene equipo de emergencia, armas y el sistema de defensa anti-meteoritos
 7,Laboratorio de Investigacion,Un laboratorio de experimentos cientifícos con alta tecnología.
