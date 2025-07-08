@@ -60,7 +60,7 @@ La estacion espacial “ZERO” es un centro de investigacion que orbita la Tier
 3. Abrelo en GitHub.
 4. Crea una nueva terminal:
    ```bash
-   g++ -o zero zero.cpp
+   g++ main.cpp src/game_logic.cpp -o ZERO_GAME -std=c++17
 5. Y ejecutalo:
    ```bash
    ./zero
