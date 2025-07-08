@@ -12,6 +12,15 @@
 
 using namespace std;
 
+// Esta funcion limpia la pantalla
+void clearScreen() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+
 
 bool loadAreasFromFile(const std::string &filePath, std::vector<Area> &gameAreas)
 {
@@ -215,7 +224,7 @@ void executeCommandCenter(Player &player, std::vector<Area> &gameAreas)
 {
     int areaIndex = 2;
     // no puede entrar si no ha completado 4 salas.
-    if (!player.tasksCompleted == 4)
+    if (!player.tasksCompleted != 4)
     {
         std::cout << "\n[ ¡ACCESO DENEGADO! ] Debes completar al menos 4 tareas para ingresar al Puente de Mando\n";
         return;
@@ -328,6 +337,7 @@ void executeCrewQuarters(Player &player, std::vector<Area> &gameAreas)
         std::cout << "\nLa consola está apagada. Ya no puedes recuperar la contraseña.\n";
     }
 }
+
 
 // logica del LA SALA DE INGENIERIA
 void executeEngineeringBay(Player &player, std::vector<Area> &gameAreas)
@@ -444,8 +454,7 @@ void executeArmoryLogic(Player& player, std::vector<Area>& gameAreas) {
     }
     
 
-       system("cls"); // Limpia la pantalla para que la secuencia no se vea mas.
-
+clearScreen(); //limpia la pantalla
     
 
     std::cout << "La secuencia ha desaparecido de la pantalla." << std::endl;
